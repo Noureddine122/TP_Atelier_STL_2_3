@@ -23,6 +23,8 @@ public:
         }
     }
 
+    ~Personne() = default;
+
 private:
      string name;
      string address;
