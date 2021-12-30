@@ -11,7 +11,6 @@ class Personne{
 public:
     Personne(string name, string address, string number) : name(std::move(name)), address(std::move(address)),
                                                                                 number(std::move(number)) {
-
     }
     string get_name() const {
         return name;
@@ -32,16 +31,14 @@ private:
      string address;
      string number;
 };
-
-class transformm{
-public:
-    void operator()(std::string& namee){
-        for(char &c : namee){
-            if(c >= 'a' && c<='z'){
-                c-=32;
-            }
-        }
+class Majuscule{
+public :void operator()(std::string& namee){
+        for (char &c: namee)c = toupper(c);
     }
+};
+class Voyelle{
+
+public:
     void operator()(std::string& name)const {
         char n[] = "*";
 
@@ -84,7 +81,8 @@ int main() {
     while(std::cin >> input && input != "exit") {
         items.push_back(input);
     }
-    std::transform(items.begin(), items.end(),std::ostream_iterator<std::string>(std::cout, "\n"),transformm());
+    std::transform(items.begin(), items.end(),std::ostream_iterator<std::string>(std::cout, "\n"),Majuscule());
+    std::transform(items.begin(), items.end(),std::ostream_iterator<std::string>(std::cout, "\n"),Voyelle());
 */
     return 0;
 }
