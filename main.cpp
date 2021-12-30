@@ -12,9 +12,6 @@ public:
     Personne(string name, string address, string number) : name(std::move(name)), address(std::move(address)),
                                                                                 number(std::move(number)) {
     }
-    string get_name() const {
-        return name;
-    }
 
     void afficher(int a){
         if(a == 0){
@@ -113,7 +110,7 @@ int main() {
         }
         cout << "Voulez vous exit : [0] si oui";
         cin>>choix;
-    }while(choix != 0);*
+    }while(choix != 0);
     ListP.clear();
     cout << "Au revoir"<<endl;
 
