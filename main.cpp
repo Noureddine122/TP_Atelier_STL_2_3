@@ -60,22 +60,65 @@ public:
 
 
 int main() {
-    auto *P1 = new Personne("Mohamed","Agadir","0614");
-    auto *P2 = new Personne("Nour","Agadir","0614");
-    auto *P3 = new Personne("Yes","Agadir","0614");
-    unordered_multimap<string,Personne*> ListP(
-            {
-                    {P1->get_name(),P1},
-                    {P2->get_name(),P2},
-                    {P3->get_name(),P3}
-            });
+    string name;
+    int choix,choix_fin;
+    unordered_multimap<string,Personne*> ListP{};
 
-    auto it = ListP.find("Hassan");
-    if(it != ListP.end()){
-        it->second->afficher(1);
-    }else{
-        cout << "Le nom n'exist pas" <<endl;
-    }
+    do{
+        cout << "************************"<<endl;
+        cout << "1-Ajouter nouveau" << endl;
+        cout<<"2-Chercher quelqu'un"<<endl;
+        cout << "************************"<<endl;
+        cin>>choix_fin;
+        switch(choix_fin){
+            case 1:{
+                string address,number;
+                cout << "Entrer votre nom: ";
+                cin>>name;
+                cout << "Entrer votre Address: ";
+                cin>>address;
+                cout << "Entrer votre number: ";
+                cin>>number;
+                if(name.empty() || address.empty() || number.empty()){
+                    cout << "Les champs doivent etre tous remplis" <<endl;
+                }else{
+                    pair<string,Personne*> neww(name,new Personne(name,address,number));
+                    ListP.insert(neww);
+                    cout << "Welcome " << name << endl;
+                }
+                break;
+            }
+            case 2:{
+                cout << "Le nom a chercher ?:";
+                cin>>name;
+                auto it = ListP.find(name);
+                if(it != ListP.end()){
+                    int i;
+                    cout << "1-Son numero"<<endl;
+                    cout << "2-Son address"<<endl;
+                    cin>>i;
+                    if(i==2||i==1){
+                        it->second->afficher(i);
+                    }else{
+                        cout << "Invalid choix"<<endl;
+                    }
+                }else{
+                    cout << "Le nom n'exist pas" <<endl;
+                }
+                break;
+            }
+            default:cout << "Choix invalid"<<endl;
+
+
+        }
+        cout << "Voulez vous exit : [0] si oui";
+        cin>>choix;
+    }while(choix != 0);*
+    ListP.clear();
+    cout << "Au revoir"<<endl;
+
+
+    /**************************************/
     /*std::list<std::string> items;
     std::string input;
     while(std::cin >> input && input != "exit") {
